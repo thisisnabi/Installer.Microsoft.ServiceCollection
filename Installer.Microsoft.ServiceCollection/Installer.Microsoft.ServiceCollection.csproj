@@ -14,6 +14,8 @@
     <Description>Simplify install and organized your ServiceCollection items</Description>
     <PackageTags>dependency-injection;DI;ASP.NET Core;IServiceCollection</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/thisisnabi/Installer.Microsoft.ServiceCollection</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thisisnabi/Installer.Microsoft.ServiceCollection</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
