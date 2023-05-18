@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>Installer.Microsoft.ServiceCollection</PackageId>
+    <Title>Services Installer</Title>
+    <Version>1.0.0</Version>
+    <Authors>thisisnabi</Authors>
+    <Company>thisisnabi</Company>
+    <Product>Installer.Microsoft.Extensions.DependencyInjection</Product>
+    <Copyright>223</Copyright>
+    <Description>Simplify install and organized your ServiceCollection items</Description>
+    <PackageTags>dependency-injection;DI;ASP.NET Core;IServiceCollection</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
