@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Installer.ConsumerWebApp.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Installer.ConsumerWebApp.Infrastructure.Installer;
+namespace App.Infrastructure.Installer;
 
 public class InfrastructureInstaller : IServiceCollectionInstaller
 {

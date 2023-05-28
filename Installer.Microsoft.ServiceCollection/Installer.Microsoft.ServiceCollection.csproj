@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Installer.Microsoft.ServiceCollection</PackageId>
+    <PackageId>ServiceCollectionInstaller</PackageId>
     <Title>Services Installer</Title>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>thisisnabi</Authors>
     <Company>thisisnabi</Company>
     <Product>Installer.Microsoft.Extensions.DependencyInjection</Product>
-    <Copyright>223</Copyright>
+    <Copyright>2023</Copyright>
     <Description>Simplify install and organized your ServiceCollection items</Description>
     <PackageTags>dependency-injection;DI;ASP.NET Core;IServiceCollection</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>

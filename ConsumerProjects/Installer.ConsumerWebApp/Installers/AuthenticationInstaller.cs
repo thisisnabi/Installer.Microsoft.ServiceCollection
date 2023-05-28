@@ -1,4 +1,4 @@
-﻿namespace Installer.ConsumerWebApp.Installers;
+﻿namespace App.Installers;
 
 public class AuthenticationInstaller : IServiceCollectionInstaller
 {

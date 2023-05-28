@@ -1,14 +1,27 @@
 
-using assemblyApplication = Installer.ConsumerWebAppl.IAssemblyMaker;
-using assemblyInfrastructure = Installer.ConsumerWebApp.Infrastructure.IAssemblyMaker;
+using assemblyPresentation = App.IAssemblyMaker;
+using assemblyInfrastructure = App.Infrastructure.IAssemblyMaker;
+using assemblyApplication = App.IAssemblyMaker;
+
 
 var builder = WebApplication.CreateBuilder(args);
 {
     var config = builder.Configuration;
 
-    // IAssemblyMaker is a simple interface that refer to assembly, you can use another type
-    builder.Services.InstallFromAssembly<assemblyApplication>(config);
+    // old version
+    builder.Services.InstallFromAssembly<assemblyPresentation>(config);
     builder.Services.InstallFromAssembly<assemblyInfrastructure>(config);
+    builder.Services.InstallFromAssembly<assemblyApplication>(config);
+
+    // new
+    builder.Services.Installer<assemblyPresentation>(config)
+                        .NextOne<assemblyInfrastructure>()
+                            .NextOne<assemblyApplication>()
+                                .Finish();
+    // Or
+    builder.Services.Installer<assemblyPresentation>(config)
+                        .NextOne<assemblyInfrastructure>()
+                            .Finish<assemblyApplication>();
 }
 
 

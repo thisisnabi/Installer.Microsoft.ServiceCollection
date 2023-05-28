@@ -1,4 +1,4 @@
-﻿namespace Installer.ConsumerWebAppl;
+﻿namespace App;
 
 public interface IAssemblyMaker
 {

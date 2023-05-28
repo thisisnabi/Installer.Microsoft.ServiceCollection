@@ -1,4 +1,4 @@
-﻿namespace Installer.ConsumerWebApp.Infrastructure;
+﻿namespace App.Infrastructure;
 
 public interface IAssemblyMaker
 {
