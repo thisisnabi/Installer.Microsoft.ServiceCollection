@@ -48,3 +48,36 @@ var app = builder.Build();
  
 app.Run();
 ```
+
+
+### NEW - Chain Adding Program.cs
+```csharp
+
+// IAssemblyMaker is a simple interface that refer to assembly, you can use another type
+using assemblyApplication = Installer.ConsumerWebAppl.IAssemblyMaker;
+using assemblyInfrastructure = Installer.ConsumerWebApp.Infrastructure.IAssemblyMaker;
+
+var builder = WebApplication.CreateBuilder(args);
+{
+    // get Configuration
+    var config = builder.Configuration;
+    
+    // Install from your assemblies - 1
+    builder.Services.Installer<assemblyApplication>(config).Finish();
+    
+    // Install from your assemblies - 2
+    builder.Services.Installer<assemblyApplication>(config)
+                          .NextOne<assemblyInfrastructure>()
+                            //.NextOne<T>() ...
+                              .Finish();
+    
+    // Install from your assemblies - 2
+    builder.Services.Installer<assemblyApplication>(config)
+                          .Finish<assemblyInfrastructure>();
+    
+    
+}
+var app = builder.Build();
+ 
+app.Run();
+```
