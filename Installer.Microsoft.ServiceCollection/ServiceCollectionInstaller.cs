@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-public class InstallerException : Exception 
+public class InstallerException : Exception
 {
     private readonly string _installerName;
     public override string Message => $"Assemby '{_installerName}' doesn't include any Installer.";
@@ -27,8 +26,8 @@ public static class ServiceCollectionInstaller
         // get all public classes that implement from IInstaller
         var installerItems = typeof(T).Assembly
                                     .GetExportedTypes()
-                                        .Where(x => typeof(IServiceCollectionInstaller).IsAssignableFrom(x) && 
-                                                    x is { IsAbstract:false, IsInterface:false})
+                                        .Where(x => typeof(IServiceCollectionInstaller).IsAssignableFrom(x) &&
+                                                    x is { IsAbstract: false, IsInterface: false })
                                         .Select(Activator.CreateInstance)
                                         .Cast<IServiceCollectionInstaller>()
                                         .ToList();
@@ -37,18 +36,21 @@ public static class ServiceCollectionInstaller
         foreach (var installer in installerItems)
         {
             installer.ConfigureServices(services, configuration);
-        }                                
+        }
+    }
+
+    public static WebApplication BuildIt<T>(this WebApplicationBuilder builder)
+    {
+        builder.Services.InstallFromAssembly<T>(builder.Configuration);
+        return builder.Build();
     }
 
     public static IStepableServiceCollectionInstaller Installer<T>(this IServiceCollection services, IConfiguration configuration) =>
          new StepableServiceCollectionInstaller(services, configuration).NextOne<T>();
-    
+
 }
-
-
-
-
-public interface IStepableServiceCollectionInstaller 
+ 
+public interface IStepableServiceCollectionInstaller
 {
     IStepableServiceCollectionInstaller NextOne<T>();
 
@@ -68,7 +70,7 @@ public class StepableServiceCollectionInstaller : IStepableServiceCollectionInst
         _configuration = configuration;
         _installers = new List<IServiceCollectionInstaller>();
     }
-  
+
     public IStepableServiceCollectionInstaller NextOne<T>()
     {
         var installerItems = typeof(T).Assembly
@@ -79,7 +81,7 @@ public class StepableServiceCollectionInstaller : IStepableServiceCollectionInst
                                   .Cast<IServiceCollectionInstaller>()
                                   .ToList();
 
-        if(installerItems is null || !installerItems.Any()) 
+        if (installerItems is null || !installerItems.Any())
         {
             throw new InstallerException(typeof(T).Name);
         }
@@ -89,7 +91,7 @@ public class StepableServiceCollectionInstaller : IStepableServiceCollectionInst
     }
 
     public void Finish<T>() => NextOne<T>().Finish();
-     
+
     public void Finish()
     {
         foreach (var installer in _installers)
