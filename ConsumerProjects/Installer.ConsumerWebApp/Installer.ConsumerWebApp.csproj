@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Installer.ConsumerWebApp.Infrastructure\Installer.ConsumerWebApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Installer.ConsumerWebAppSupperClean\Installer.ConsumerWebAppSupperClean.csproj" />
     <ProjectReference Include="..\..\Installer.Microsoft.ServiceCollection\Installer.Microsoft.ServiceCollection.csproj" />
   </ItemGroup>
 
