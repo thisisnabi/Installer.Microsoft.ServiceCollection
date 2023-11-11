@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <PackageId>ServiceCollectionInstaller</PackageId>
     <Title>Services Installer</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>thisisnabi</Authors>
     <Company>thisisnabi</Company>
     <Product>Installer.Microsoft.Extensions.DependencyInjection</Product>
