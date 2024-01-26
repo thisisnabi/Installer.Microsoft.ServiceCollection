@@ -39,13 +39,38 @@ public static class ServiceCollectionInstaller
             installer.ConfigureServices(services, configuration);
         }
     }
+    
+    public static void InstallAllModules(this IServiceCollection services, IConfiguration configuration)
+    {
+        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+        foreach (var assembly in allAssemblies)
+        {
+            var installerItems = assembly
+                .GetExportedTypes()
+                .Where(x => typeof(IServiceCollectionInstaller).IsAssignableFrom(x) &&
+                            x is { IsAbstract: false, IsInterface: false })
+                .Select(Activator.CreateInstance)
+                .Cast<IServiceCollectionInstaller>()
+                .ToList();
 
+            foreach (var installer in installerItems)
+            {
+                installer.ConfigureServices(services, configuration);
+                GC.Collect();
+            }    
+        }
+        
+    }
     public static WebApplication BuildIt<T>(this WebApplicationBuilder builder)
     {
         builder.Services.InstallFromAssembly<T>(builder.Configuration);
         return builder.Build();
     }
-
+    public static WebApplication BuildWithAllModules<T>(this WebApplicationBuilder builder)
+    {
+        builder.Services.InstallAllModules(builder.Configuration);
+        return builder.Build();
+    }
     public static IStepableServiceCollectionInstaller Installer<T>(this IServiceCollection services, IConfiguration configuration) =>
          new StepableServiceCollectionInstaller(services, configuration).NextOne<T>();
 
